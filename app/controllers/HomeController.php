@@ -10,6 +10,10 @@ class HomeController extends BaseController {
         $this->return_html("index.tpl");
     }
 
+    function showLogin(){
+    	$this->return_html("Login.tpl");	
+    }
+
 }
 
 ?>

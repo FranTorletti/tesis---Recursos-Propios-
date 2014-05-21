@@ -4,5 +4,5 @@
 {/block}
 
 {block name="body"}
-Hello world!
+, nullable=true
 {/block}

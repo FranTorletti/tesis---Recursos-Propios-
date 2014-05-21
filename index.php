@@ -14,6 +14,9 @@ Session::init();
 
 
 Controller::$router->get('/', 'HomeController', 'index');
+Controller::$router->get('/home/signup', 'HomeController', 'showLogin');
+Controller::$router->post('/home/login', 'UserController', 'login');
+Controller::$router->get('/home/logout', 'UserController', 'logout');
 
 //run server
 Controller::$router->run();

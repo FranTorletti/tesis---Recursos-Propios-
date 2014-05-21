@@ -1,0 +1,8 @@
+vendor/*
+app/views/cache/*
+app/views/templates_c/*
+app/config/config.php
+composer.lock
+/nbproject/private/
+assets/userPictures/*
+assets/img/*
