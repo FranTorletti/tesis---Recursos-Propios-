@@ -16,11 +16,18 @@ class User {
     private $id;
     
     /**
+     * @var $documentType
+     *
+     * @Column(name="documentType", type="string")
+     */
+    private $documentType;
+
+    /**
      * @var string
      *
-     * @Column(name="dni", type="string", length=255)
+     * @Column(name="document", type="string", length=255)
      */
-    private $dni;
+    private $document;
 
     /**
      * @var string
@@ -53,30 +60,14 @@ class User {
     /**
      * @var string
      *
-     * @Column(name="address", type="string", length=255, nullable=true)
-     */
-    private $address;
-
-    /**
-     * @var string
-     *
-     * @Column(name="phone", type="string", length=255)
-     */
-    private $phone;
-
-    /**
-     * @var $birthday
-     *
-     * @Column(name="birthday", type="string")
-     */
-    private $birthday;
-
-    /**
-     * @var string
-     *
      * @Column(name="type", type="string", length=255)
      */
     private $type;
+
+    /**
+     * @OneToMany(targetEntity="ServiceUser", mappedBy="user")
+     */
+    private $services;
 
     // ------------ gets and set method ----------
 
@@ -90,23 +81,43 @@ class User {
     }
     
     /**
-     * Set dni
+     * Set documentType
      *
-     * @param string $dni
-     * @return dni
+     * @param birthday $documentType
+     * @return birthday
      */
-    public function setDni($dni) {
-        $this->dni = $dni;
+    public function setDocumentType($documentType) {
+        $this->documentType = $documentType;
         return $this;
     }
 
     /**
-     * Get dni
+     * Get documentType
+     *
+     * @return documentType
+     */
+    public function getDocumentType() {
+        return $this->documentType;
+    }
+
+    /**
+     * Set document
+     *
+     * @param string $document
+     * @return document
+     */
+    public function setDocument($document) {
+        $this->document = $document;
+        return $this;
+    }
+
+    /**
+     * Get document
      *
      * @return string 
      */
-    public function getDni() {
-        return $this->dni;
+    public function getDocument() {
+        return $this->document;
     }
 
     /**
@@ -189,66 +200,6 @@ class User {
         return $this->password;
     }
 
-     /**
-     * Set address
-     *
-     * @param string $address
-     * @return address
-     */
-    public function setAddress($address) {
-        $this->address = $address;
-        return $this;
-    }
-
-    /**
-     * Get address
-     *
-     * @return string 
-     */
-    public function getAddress() {
-        return $this->address;
-    }
-
-    /**
-     * Set phone
-     *
-     * @param string $phone
-     * @return phone
-     */
-    public function setPhone($phone) {
-        $this->phone = $phone;
-        return $this;
-    }
-
-    /**
-     * Get phone
-     *
-     * @return string 
-     */
-    public function getPhone() {
-        return $this->phone;
-    }
-
-    /**
-     * Set Birthday
-     *
-     * @param birthday $birthday
-     * @return birthday
-     */
-    public function setBirthday($birthday) {
-        $this->birthday = $birthday;
-        return $this;
-    }
-
-    /**
-     * Get Birthday
-     *
-     * @return birthday
-     */
-    public function getBirthday() {
-        return $this->birthday;
-    }
-
     /**
      * Set Type
      *
@@ -267,6 +218,15 @@ class User {
      */
     public function getType() {
         return $this->type;
+    }
+
+    /**
+     * Get services
+     *
+     * @return services 
+     */
+    public function getServices() {
+        return $this->services;
     }
 }
  

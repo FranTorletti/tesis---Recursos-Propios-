@@ -1,6 +1,7 @@
 {
     "require": {
-        "fmunoz92/mili": "*"
+        "fmunoz92/mili": "*",
+        "phpmailer/phpmailer": "*"
     },
     "minimum-stability":"dev",
     "prefer-stable": true,

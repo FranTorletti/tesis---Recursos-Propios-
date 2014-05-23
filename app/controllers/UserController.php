@@ -13,30 +13,16 @@ class UserController extends BaseController {
         $u = Model::getEM()->getRepository("User")->isValidUser($email, $password);
         if ($u) {
             $user = Model::getEM()->getRepository("User")->getByEmail($email);
-        
+            // set session
             Session::set('id', $user->getId());
             Session::set('nombre', $user->getName());
             Session::set('apellido', $user->getSurname());
-            Session::set('user', $user->getUser());
-            Session::set('systemtype', $user->getSystemType());
-                
-                
-                if(Session::get('systemtype') == "BiddingMarketplace"){
-                    Session::set('currentSystem','decontrader');
-                }
-
-                if ($user->getType() == 'admin') {
+            Session::set('type', $user->getType());
+            // if is admin    
+            if ($user->getType() == 'admin') 
                     Session::set('isAdmin', true);
-                }
-                if (Session::get('systemtype') == "Bidding") {
-                    $this->redirect(Router::url("/econtrata"));
-                } else {
-                    $this->redirect(Router::url("/decontrader"));
-                }
-            } else {
-                FlashMsgView::add(MsgType::Error, "Usuario Bloqueado o Cuenta no validada. Contactese con el Administrador");
-                $this->redirect(Router::url("/home/signup"));
-            }
+            $this->redirect(Router::url("/"));
+
         } else {
             FlashMsgView::add(MsgType::Error, "Escriba bien su Email o Contraseña");
             $this->redirect(Router::url("/home/signup"));
@@ -47,11 +33,10 @@ class UserController extends BaseController {
         Session::del('id');
         Session::del('nombre');
         Session::del('apellido');
-        Session::del('user');
         Session::del('isAdmin');
-        Session::set('systemtype', "offline");
+        Session::set('type', "offline");
 
-        $this->redirect(Router::url("/home"));
+        $this->redirect(Router::url("/"));
     }
 
 }

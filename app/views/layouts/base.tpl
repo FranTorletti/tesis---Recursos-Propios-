@@ -5,7 +5,7 @@
     	<link href="{Router::assets('css/bootstrap.css')}" rel="stylesheet"/>  
     	<link rel="shortcut icon" href="{Router::assets('img/favicon.ico')}" type="image/x-icon">
   	</head>
-  	<body>
+  	<body bgcolor="#FF0000">
   		<div class="container row">
     		<br>
     		<!-- head -->
@@ -28,7 +28,7 @@
   							{if (Session::Get('nombre')=="")}
                             	<li><a href="{Router::url('/home/signup')}">Iniciar Sesion</a></li>
                         	{else}
-                            	<a href="{Router::url('/home/user/logout/')}">Cerrar Sesión</a>
+                            	<li><a href="{Router::url('/home/logout')}">Cerrar Sesion</a></li>
                         	{/if}
   							
   						</ul>
