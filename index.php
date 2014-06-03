@@ -17,6 +17,11 @@ Controller::$router->get('/', 'HomeController', 'index');
 Controller::$router->get('/home/signup', 'HomeController', 'showLogin');
 Controller::$router->post('/home/login', 'UserController', 'login');
 Controller::$router->get('/home/logout', 'UserController', 'logout');
+Controller::$router->get('/home/fqa', 'HomeController', 'fqa');
 
+Controller::$router->get('/home/admin/panelAdmin', 'AdminController', 'PanelAdmin');
+Controller::$router->get('/home/admin/dependence', 'AdminController', 'Dependence');
+Controller::$router->get('/home/admin/dependence/view/:id', 'AdminController', 'ViewDependence');
+Controller::$router->post('/home/admin/dependence/edit/:id', 'AdminController', 'EditDependence');
 //run server
 Controller::$router->run();

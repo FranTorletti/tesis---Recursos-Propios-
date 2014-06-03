@@ -14,6 +14,9 @@ class HomeController extends BaseController {
     	$this->return_html("Login.tpl");	
     }
 
+    function fqa(){
+    	$this->return_html("FQA.tpl");	
+    }
 }
 
 ?>
