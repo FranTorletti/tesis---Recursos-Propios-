@@ -45,6 +45,42 @@ class AdminController extends BaseController {
         $this->data["dependence"] = $dependence;
         $this->redirect(Router::url("/home/admin/dependence/view/".$id));
     }
+
+    function ActivityType() {
+        $activityTypes = Model::getEM()->getRepository("ActivityType")->findAll();
+        $this->data["activityTypes"] = $activityTypes;
+        $this->return_html("ActivityType.tpl");
+    }
+
+    function ViewActivityType($id) {
+        $activityType = Model::getEM()->getRepository("ActivityType")->getById($id);
+        $this->data["activityType"] = $activityType;
+        $this->return_html("ViewActivityType.tpl");
+    }
+
+    function EditActivityType($id) {
+        //get Activity Type objet
+        $activityType = Model::getEM()->getRepository("ActivityType")->getById($id);
+        //get form data
+        $req = Controller::$router->request();
+        $code = $req->params("code");
+        $description = $req->params("description");
+        $note = $req->params("note");
+        if ($code != "" && $description != "" && $note != ""){
+            $activityType->setCode($code);
+            $activityType->setDescription($description);
+            $activityType->setNote($note);
+            //update database
+            Model::getEM()->merge($activityType);
+            Model::getEM()->flush();
+            // alert 
+            FlashMsgView::add(MsgType::Successful, "El tipo de actividad se ha actualizado correctamente!");
+        } else
+            FlashMsgView::add(MsgType::Error, "No puede puede actualizar el tipo de actividad, hay casilleros en blanco.");
+        // redirect to view activity Type
+        $this->data["activityType"] = $activityType;
+        $this->redirect(Router::url("/home/admin/activityType/view/".$id));
+    }
 }
 
 ?>
