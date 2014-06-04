@@ -44,6 +44,31 @@ class AdminController extends BaseController {
         $this->redirect(Router::url("/home/admin/dependence/view/".$id));
     }
 
+    function CreateDependence(){
+        $this->return_html("CreateDependence.tpl");
+    }
+
+    function SaveDependence(){
+        $req = Controller::$router->request();
+        $code = $req->params("code");
+        $description = $req->params("description");
+        $note = $req->params("note");
+        // create and set dependence
+        $dependence = new Dependence();
+        $dependence->setCode($code);
+        $dependence->setDescription($description);
+        $dependence->setNote($note);
+        //update database
+        Model::getEM()->persist($dependence);
+        Model::getEM()->flush();
+        // alert
+        FlashMsgView::add(MsgType::Successful, "La dependencia se ha creado correctamente!");
+        // redirect to view dependence
+        $dependences = Model::getEM()->getRepository("Dependence")->findAll();
+        $this->data["dependences"] = $dependences;
+        $this->redirect(Router::url("/home/admin/dependence"));
+    }
+
     function ActivityType() {
         $activityTypes = Model::getEM()->getRepository("ActivityType")->findAll();
         $this->data["activityTypes"] = $activityTypes;
@@ -78,29 +103,29 @@ class AdminController extends BaseController {
         $this->redirect(Router::url("/home/admin/activityType/view/".$id));
     }
 
-    function CreateDependence(){
-        $this->return_html("CreateDependence.tpl");
+    function CreateActivityType(){
+        $this->return_html("CreateActivityType.tpl");
     }
 
-    function SaveDependence(){
+    function SaveActivityType(){
         $req = Controller::$router->request();
         $code = $req->params("code");
         $description = $req->params("description");
         $note = $req->params("note");
-        // create and set dependence
-        $dependence = new Dependence();
-        $dependence->setCode($code);
-        $dependence->setDescription($description);
-        $dependence->setNote($note);
+        // create and set activity type
+        $activityType = new ActivityType();
+        $activityType->setCode($code);
+        $activityType->setDescription($description);
+        $activityType->setNote($note);
         //update database
-        Model::getEM()->persist($dependence);
+        Model::getEM()->persist($activityType);
         Model::getEM()->flush();
         // alert
-        FlashMsgView::add(MsgType::Successful, "La dependencia se ha creado correctamente!");
-        // redirect to view dependence
-        $dependences = Model::getEM()->getRepository("Dependence")->findAll();
-        $this->data["dependences"] = $dependences;
-        $this->redirect(Router::url("/home/admin/dependence"));
+        FlashMsgView::add(MsgType::Successful, "El tipo de actividad se ha creado correctamente!");
+        // redirect to view activity type
+        $activityTypes = Model::getEM()->getRepository("ActivityType")->findAll();
+        $this->data["activityTypes"] = $activityTypes;
+        $this->redirect(Router::url("/home/admin/activityType"));
     }
 }
 

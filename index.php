@@ -33,6 +33,8 @@ Controller::$router->post('/home/admin/dependence/save', 'AdminController', 'Sav
 Controller::$router->get('/home/admin/activityType', 'AdminController', 'ActivityType');
 Controller::$router->get('/home/admin/activityType/view/:id', 'AdminController', 'ViewActivityType');
 Controller::$router->post('/home/admin/activityType/edit/:id', 'AdminController', 'EditActivityType');
+Controller::$router->get('/home/admin/activityType/create', 'AdminController', 'CreateActivityType');
+Controller::$router->post('/home/admin/activityType/save', 'AdminController', 'SaveActivityType');
 
 //run server
 Controller::$router->run();

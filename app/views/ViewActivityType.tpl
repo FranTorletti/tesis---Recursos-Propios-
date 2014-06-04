@@ -51,13 +51,13 @@
                     </tr>
                     <tr class="success">
                         <td><label>Nota</label></td>
-                        <td><input name="note" type="text" value="{$activityType->getNote()}"></td>
+                        <td><input name="note" type="text" value="{$activityType->getNote()}" required></td>
                     </tr>
                 </tbody>
             </table>
             <input type="submit" value="Actualizar" class="btn btn-success">
         </form>
-        <button type="botton" class="btn btn-info" onclick="noEdit()"><i class="icon-white icon-arrow-left" required></i> Volver</button>
+        <button type="botton" class="btn btn-info" onclick="noEdit()"><i class="icon-white icon-arrow-left"></i> Volver</button>
     </div>
 
     <script type="text/javascript">

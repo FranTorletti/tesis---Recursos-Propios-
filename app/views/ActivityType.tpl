@@ -13,7 +13,7 @@
         </div>
         <div class="span3">
             <br>
-            <a class="btn btn-info" href="">Crear Tipo de Actividad</a>
+            <a class="btn btn-info" href="{Router::url('/home/admin/activityType/create')}">Crear Tipo de Actividad</a>
         </div>
     </div>
     <hr class="featurette-divider">
