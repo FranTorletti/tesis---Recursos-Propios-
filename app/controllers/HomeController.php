@@ -6,16 +6,16 @@ class HomeController extends BaseController {
         parent::__construct();
     }
 
-    function index() {
+    function Index() {
         $this->return_html("index.tpl");
     }
 
-    function showLogin(){
+    function ShowLogin(){
     	$this->return_html("Login.tpl");	
     }
 
-    function fqa(){
-    	$this->return_html("FQA.tpl");	
+    function Faq(){
+    	$this->return_html("FAQ.tpl");	
     }
 }
 

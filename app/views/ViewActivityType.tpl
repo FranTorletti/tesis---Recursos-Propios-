@@ -43,11 +43,11 @@
                 <tbody style="border-collapse:separate">
                     <tr class="success">
                         <td><label>Codigo</label></td>
-                        <td><input name="code" type="text" value="{$activityType->getCode()}"></td>
+                        <td><input name="code" type="text" value="{$activityType->getCode()}" required></td>
                     </tr>
                     <tr class="success">
                         <td><label>Descripcion</label></td>
-                        <td><input name="description" type="text" value="{$activityType->getDescription()}"></td>
+                        <td><input name="description" type="text" value="{$activityType->getDescription()}" required></td>
                     </tr>
                     <tr class="success">
                         <td><label>Nota</label></td>
@@ -57,7 +57,7 @@
             </table>
             <input type="submit" value="Actualizar" class="btn btn-success">
         </form>
-        <button type="botton" class="btn btn-info" onclick="noEdit()"><i class="icon-white icon-arrow-left"></i> Volver</button>
+        <button type="botton" class="btn btn-info" onclick="noEdit()"><i class="icon-white icon-arrow-left" required></i> Volver</button>
     </div>
 
     <script type="text/javascript">

@@ -43,15 +43,15 @@
                 <tbody style="border-collapse:separate">
                     <tr class="success">
                         <td><label>Codigo</label></td>
-                        <td><input name="code" type="text" value="{$dependence->getCode()}"></td>
+                        <td><input name="code" type="text" value="{$dependence->getCode()}" required></td>
                     </tr>
                     <tr class="success">
                         <td><label>Descripcion</label></td>
-                        <td><input name="description" type="text" value="{$dependence->getDescription()}"></td>
+                        <td><input name="description" type="text" value="{$dependence->getDescription()}" required></td>
                     </tr>
                     <tr class="success">
                         <td><label>Nota</label></td>
-                        <td><input name="note" type="text" value="{$dependence->getNote()}"></td>
+                        <td><input name="note" type="text" value="{$dependence->getNote()}" required></td>
                     </tr>
                 </tbody>
             </table>

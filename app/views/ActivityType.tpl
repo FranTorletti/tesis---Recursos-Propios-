@@ -5,7 +5,17 @@
 
 {block name="body"}
     <br>
-    <label><h3>Tipo de Actividad</h3></label>
+    <div class="row">
+        <div class="span9">
+            <label>
+                <h3 style="margin: 10px 20px;">Tipo de Actividad</h3>
+            </label>
+        </div>
+        <div class="span3">
+            <br>
+            <a class="btn btn-info" href="">Crear Tipo de Actividad</a>
+        </div>
+    </div>
     <hr class="featurette-divider">
     {if $activityTypes}
         <table class="table table-condensed">

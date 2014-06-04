@@ -30,17 +30,15 @@ class AdminController extends BaseController {
         $code = $req->params("code");
         $description = $req->params("description");
         $note = $req->params("note");
-        if ($code != "" && $description != "" && $note != ""){
-            $dependence->setCode($code);
-            $dependence->setDescription($description);
-            $dependence->setNote($note);
-            //update database
-            Model::getEM()->merge($dependence);
-            Model::getEM()->flush();
-            // alert 
-            FlashMsgView::add(MsgType::Successful, "La dependencia se ha actualizado correctamente!");
-        } else
-            FlashMsgView::add(MsgType::Error, "No puede puede actualizar la dependencia, hay casilleros en blanco.");
+        // set dependence
+        $dependence->setCode($code);
+        $dependence->setDescription($description);
+        $dependence->setNote($note);
+        //update database
+        Model::getEM()->merge($dependence);
+        Model::getEM()->flush();
+        // alert 
+        FlashMsgView::add(MsgType::Successful, "La dependencia se ha actualizado correctamente!");
         // redirect to view dependence
         $this->data["dependence"] = $dependence;
         $this->redirect(Router::url("/home/admin/dependence/view/".$id));
@@ -66,20 +64,43 @@ class AdminController extends BaseController {
         $code = $req->params("code");
         $description = $req->params("description");
         $note = $req->params("note");
-        if ($code != "" && $description != "" && $note != ""){
-            $activityType->setCode($code);
-            $activityType->setDescription($description);
-            $activityType->setNote($note);
-            //update database
-            Model::getEM()->merge($activityType);
-            Model::getEM()->flush();
-            // alert 
-            FlashMsgView::add(MsgType::Successful, "El tipo de actividad se ha actualizado correctamente!");
-        } else
-            FlashMsgView::add(MsgType::Error, "No puede puede actualizar el tipo de actividad, hay casilleros en blanco.");
+        // set activity type
+        $activityType->setCode($code);
+        $activityType->setDescription($description);
+        $activityType->setNote($note);
+        //update database
+        Model::getEM()->merge($activityType);
+        Model::getEM()->flush();
+        // alert 
+        FlashMsgView::add(MsgType::Successful, "El tipo de actividad se ha actualizado correctamente!");
         // redirect to view activity Type
         $this->data["activityType"] = $activityType;
         $this->redirect(Router::url("/home/admin/activityType/view/".$id));
+    }
+
+    function CreateDependence(){
+        $this->return_html("CreateDependence.tpl");
+    }
+
+    function SaveDependence(){
+        $req = Controller::$router->request();
+        $code = $req->params("code");
+        $description = $req->params("description");
+        $note = $req->params("note");
+        // create and set dependence
+        $dependence = new Dependence();
+        $dependence->setCode($code);
+        $dependence->setDescription($description);
+        $dependence->setNote($note);
+        //update database
+        Model::getEM()->persist($dependence);
+        Model::getEM()->flush();
+        // alert
+        FlashMsgView::add(MsgType::Successful, "La dependencia se ha creado correctamente!");
+        // redirect to view dependence
+        $dependences = Model::getEM()->getRepository("Dependence")->findAll();
+        $this->data["dependences"] = $dependences;
+        $this->redirect(Router::url("/home/admin/dependence"));
     }
 }
 

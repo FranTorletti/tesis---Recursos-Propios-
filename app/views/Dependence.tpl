@@ -5,7 +5,18 @@
 
 {block name="body"}
     <br>
-    <label><h3>Dependencias</h3></label>
+    <div class="row">
+        <div class="span9">
+            <label>
+                <h3 style="margin: 10px 20px;">Dependencias</h3>
+            </label>
+        </div>
+        <div class="span3">
+            <br>
+            <a class="btn btn-info" href="{Router::url('/home/admin/dependence/create')}">Crear Dependencia</a>
+        </div>
+    </div>
+
     <hr class="featurette-divider">
     {if $dependences}
         <table class="table table-condensed">

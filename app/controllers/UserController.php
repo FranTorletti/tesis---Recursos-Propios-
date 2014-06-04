@@ -6,7 +6,7 @@ class UserController extends BaseController {
         parent::__construct();
     }
 
-    function login() {
+    function Login() {
         $d = Controller::$router->request();
         $email = $d->params("inputEmail");
         $password = $d->params("inputPassword");
@@ -29,7 +29,7 @@ class UserController extends BaseController {
         }
     }
 
-    function logout() {
+    function Logout() {
         Session::del('id');
         Session::del('nombre');
         Session::del('apellido');

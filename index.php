@@ -12,20 +12,22 @@ Controller::$router = new Router();
 
 Session::init();
 
-// home
-Controller::$router->get('/', 'HomeController', 'index');
-Controller::$router->get('/home/signup', 'HomeController', 'showLogin');
-Controller::$router->post('/home/login', 'UserController', 'login');
-Controller::$router->get('/home/logout', 'UserController', 'logout');
-Controller::$router->get('/home/fqa', 'HomeController', 'fqa');
+//  ------  Home  ------
+Controller::$router->get('/', 'HomeController', 'Index');
+Controller::$router->get('/home/signup', 'HomeController', 'ShowLogin');
+Controller::$router->post('/home/login', 'UserController', 'Login');
+Controller::$router->get('/home/logout', 'UserController', 'Logout');
+Controller::$router->get('/home/faq', 'HomeController', 'Faq');
 
-// Admin
+//  ------  Admin  ------
 // Panel
 Controller::$router->get('/home/admin/panelAdmin', 'AdminController', 'PanelAdmin');
 // Admin - Dependence
 Controller::$router->get('/home/admin/dependence', 'AdminController', 'Dependence');
 Controller::$router->get('/home/admin/dependence/view/:id', 'AdminController', 'ViewDependence');
 Controller::$router->post('/home/admin/dependence/edit/:id', 'AdminController', 'EditDependence');
+Controller::$router->get('/home/admin/dependence/create', 'AdminController', 'CreateDependence');
+Controller::$router->post('/home/admin/dependence/save', 'AdminController', 'SaveDependence');
 
 // Admin - Activity Type
 Controller::$router->get('/home/admin/activityType', 'AdminController', 'ActivityType');

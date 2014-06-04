@@ -19,7 +19,7 @@
   						<ul class="nav">
   							<li><a href=""><i class="icon-home" style="background-image:#999999" ></i> Home</a></li>
   							<li class="divider-vertical"></li>
-  							<li><a href="{Router::url('/home/fqa')}">FQA</a></li>
+  							<li><a href="{Router::url('/home/faq')}">FAQ</a></li>
   							<li class="divider-vertical"></li>
   							<li><a href="{Router::url('/home/admin/panelAdmin')}"> Panel Admin</a></li>
                 <li class="divider-vertical"></li>
