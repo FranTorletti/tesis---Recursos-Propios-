@@ -39,6 +39,77 @@ class UserController extends BaseController {
         $this->redirect(Router::url("/"));
     }
 
+    function User() {
+        $this->data["users"] = Model::getEM()->getRepository("User")->findAll();
+        $this->return_html("user/User.tpl");
+    }
+
+    function ViewUser($id) {
+        $this->data["user"] = Model::getEM()->getRepository("User")->getById($id);
+        $this->return_html("user/ViewUser.tpl");
+    }
+
+    function EditUser($id) {
+        //get user objet
+        $user = Model::getEM()->getRepository("User")->getById($id);
+        //get form data
+        $req = Controller::$router->request();
+        $name = $req->params("name");
+        $surname = $req->params("surname");
+        $documentType = $req->params("documentType");
+        $document = $req->params("document");
+        $email = $req->params("email");
+        $password = $req->params("password");
+        $type = $req->params("type");
+        // set user
+        $user->setName($name);
+        $user->setSurname($surname);
+        $user->setDocumentType($documentType);
+        $user->setDocument($document);
+        $user->setEmail($email);
+        $user->setPassword($password);
+        $user->setType($type);
+        //update database
+        Model::getEM()->merge($user);
+        Model::getEM()->flush();
+        // alert 
+        FlashMsgView::add(MsgType::Successful, "El usuario se ha actualizado correctamente!");
+        // redirect to view user
+        $this->data["user"] = $user;
+        $this->redirect(Router::url("/home/admin/user/view/".$id));
+    }
+
+    function CreateUser(){
+        $this->return_html("user/CreateUser.tpl");
+    }
+
+    function SaveUser(){
+        $req = Controller::$router->request();
+        $name = $req->params("name");
+        $surname = $req->params("surname");
+        $documentType = $req->params("documentType");
+        $document = $req->params("document");
+        $email = $req->params("email");
+        $password = $req->params("password");
+        $type = $req->params("type");
+        // create and set user
+        $user = new User();
+        $user->setName($name);
+        $user->setSurname($surname);
+        $user->setDocumentType($documentType);
+        $user->setDocument($document);
+        $user->setEmail($email);
+        $user->setPassword($password);
+        $user->setType($type);
+        //update database
+        Model::getEM()->persist($user);
+        Model::getEM()->flush();
+        // alert
+        FlashMsgView::add(MsgType::Successful, "El usuario se ha creado correctamente!");
+        // redirect to view users
+        $this->data["users"] = Model::getEM()->getRepository("User")->findAll();
+        $this->redirect(Router::url("/home/admin/user"));
+    }
 }
 
 ?>

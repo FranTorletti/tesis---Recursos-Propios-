@@ -18,16 +18,15 @@ class ServiceRepository extends EntityRepository {
         return ($return);
     }
 
-    function getLastService($activityTypeCode,$resourceOriginCode,$dependenceCode){
-        $criteria = array("activityType" => $activityTypeCode, 
-            "resourceOrigin" => $resourceOriginCode,"dependence" => $dependenceCode);
-        $return = Model::getEM()->getRepository("Service")->findOneBy($criterio);
-
-        return ($return);
+    function getLastService($dependence,$resourceOrigin,$serviceType){
+        $pdo = Model::getPDO();
+        $result = $pdo->query("select max(code) as code from service where ($dependence = dependence_id and $resourceOrigin = resourceOrigin_id and $serviceType = serviceType_id)");
+        $temp = $result->fetch();
+        return $temp[0];
     }
 
     function getService($activityTypeCode,$resourceOriginCode,$dependenceCode,$serviceCode){
-        $criteria = array("activityType" => $activityTypeCode,"resourceOrigin" => $resourceOriginCode,
+        $criterio = array("activityType" => $activityTypeCode,"resourceOrigin" => $resourceOriginCode,
             "dependence" => $dependenceCode, "code" => $serviceCode);
         $return = Model::getEM()->getRepository("Service")->findOneBy($criterio);
 

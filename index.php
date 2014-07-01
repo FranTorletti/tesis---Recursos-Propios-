@@ -23,18 +23,36 @@ Controller::$router->get('/home/faq', 'HomeController', 'Faq');
 // Panel
 Controller::$router->get('/home/admin/panelAdmin', 'AdminController', 'PanelAdmin');
 // Admin - Dependence
-Controller::$router->get('/home/admin/dependence', 'AdminController', 'Dependence');
-Controller::$router->get('/home/admin/dependence/view/:id', 'AdminController', 'ViewDependence');
-Controller::$router->post('/home/admin/dependence/edit/:id', 'AdminController', 'EditDependence');
-Controller::$router->get('/home/admin/dependence/create', 'AdminController', 'CreateDependence');
-Controller::$router->post('/home/admin/dependence/save', 'AdminController', 'SaveDependence');
+Controller::$router->get('/home/admin/dependence', 'DependenceController', 'Dependence');
+Controller::$router->get('/home/admin/dependence/view/:id', 'DependenceController', 'ViewDependence');
+Controller::$router->post('/home/admin/dependence/edit/:id', 'DependenceController', 'EditDependence');
+Controller::$router->get('/home/admin/dependence/create', 'DependenceController', 'CreateDependence');
+Controller::$router->post('/home/admin/dependence/save', 'DependenceController', 'SaveDependence');
+Controller::$router->get('/home/admin/dependence/delete/:id', 'DependenceController', 'DeleteDependence');
 
-// Admin - Activity Type
-Controller::$router->get('/home/admin/activityType', 'AdminController', 'ActivityType');
-Controller::$router->get('/home/admin/activityType/view/:id', 'AdminController', 'ViewActivityType');
-Controller::$router->post('/home/admin/activityType/edit/:id', 'AdminController', 'EditActivityType');
-Controller::$router->get('/home/admin/activityType/create', 'AdminController', 'CreateActivityType');
-Controller::$router->post('/home/admin/activityType/save', 'AdminController', 'SaveActivityType');
+// Admin - Resource Origin
+Controller::$router->get('/home/admin/resourceOrigin', 'ResourceOriginController', 'ResourceOrigin');
+Controller::$router->get('/home/admin/resourceOrigin/view/:id', 'ResourceOriginController', 'ViewResourceOrigin');
+Controller::$router->post('/home/admin/resourceOrigin/edit/:id', 'ResourceOriginController', 'EditResourceOrigin');
+Controller::$router->get('/home/admin/resourceOrigin/create', 'ResourceOriginController', 'CreateResourceOrigin');
+Controller::$router->post('/home/admin/resourceOrigin/save', 'ResourceOriginController', 'SaveResourceOrigin');
+Controller::$router->get('/home/admin/resourceOrigin/delete/:id', 'ResourceOriginController', 'DeleteResourceOrigin');
+
+// Admin - User
+Controller::$router->get('/home/admin/user', 'UserController', 'User');
+Controller::$router->get('/home/admin/user/view/:id', 'UserController', 'ViewUser');
+Controller::$router->post('/home/admin/user/edit/:id', 'UserController', 'EditUser');
+Controller::$router->get('/home/admin/user/create', 'UserController', 'CreateUser');
+Controller::$router->post('/home/admin/user/save', 'UserController', 'SaveUser');
+Controller::$router->post('/home/admin/user/delete/:id', 'UserController', 'DeleteUser');
+
+// Admin - ServiceType
+Controller::$router->get('/home/admin/serviceType', 'ServiceTypeController', 'ServiceType');
+Controller::$router->get('/home/admin/serviceType/view/:id', 'ServiceTypeController', 'ViewServiceType');
+Controller::$router->post('/home/admin/serviceType/edit/:id', 'ServiceTypeController', 'EditServiceType');
+Controller::$router->get('/home/admin/serviceType/create', 'ServiceTypeController', 'CreateServiceType');
+Controller::$router->post('/home/admin/serviceType/save', 'ServiceTypeController', 'SaveServiceType');
+Controller::$router->get('/home/admin/serviceType/delete/:id', 'ServiceTypeController', 'DeleteServiceType');
 
 //run server
 Controller::$router->run();

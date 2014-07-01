@@ -7,6 +7,8 @@ class HomeController extends BaseController {
     }
 
     function Index() {
+        $service = new Service();
+        $service->generateCode("AL","A00","23");
         $this->return_html("index.tpl");
     }
 

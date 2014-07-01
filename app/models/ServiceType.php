@@ -16,11 +16,18 @@ class ServiceType {
     private $id;
     
     /**
-     * @var $designation
+     * @var $code
      *
-     * @Column(name="designation", type="string")
+     * @Column(name="code", type="string")
      */
-    private $designation;
+    private $code;
+
+    /**
+     * @var string
+     *
+     * @Column(name="description", type="string", length=255)
+     */
+    private $description;
 
     /**
      * @var string
@@ -32,14 +39,14 @@ class ServiceType {
     /**
      * @var string
      *
-     * @Column(name="facRetention", type="float")
+     * @Column(name="facRetention", type="string", length=255)
      */
     private $facRetention;
 
     /**
      * @var string
      *
-     * @Column(name="uniRetention", type="float")
+     * @Column(name="uniRetention", type="string", length=255)
      */
     private $uniRetention;
 
@@ -60,23 +67,43 @@ class ServiceType {
     }
     
     /**
-     * Set designation
+     * Set code
      *
-     * @param string $designation
-     * @return designation
+     * @param string $code
+     * @return code
      */
-    public function setDesignation($designation) {
-        $this->designation = $designation;
+    public function setCode($code) {
+        $this->code = $code;
         return $this;
     }
 
     /**
-     * Get designation
+     * Get code
      *
-     * @return designation
+     * @return code
      */
-    public function getDesignation() {
-        return $this->designation;
+    public function getCode() {
+        return $this->code;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return description
+     */
+    public function setDescription($description) {
+        $this->description = $description;
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription() {
+        return $this->description;
     }
 
     /**

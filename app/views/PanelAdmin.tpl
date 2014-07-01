@@ -13,20 +13,20 @@
             <br>
             Dependencias
         </a>
-        <a href="{Router::url('/home/admin/activityType')}" class="btn btn-lg btn-info" style="width: 158px">
-            <span class="icon icon-info-sign"></span>
-            <br>
-            Tipo de Actividades
-        </a>
-        <a href="" class="btn btn-lg btn-info" style="width: 158px">
+        <a href="{Router::url('/home/admin/resourceOrigin')}" class="btn btn-lg btn-info" style="width: 158px">
             <span class="icon icon-info-sign"></span>
             <br>
             Origen de los recursos
         </a>
+        <a href="{Router::url('/home/admin/serviceType')}" class="btn btn-lg btn-info" style="width: 158px">
+            <span class="icon icon-info-sign"></span>
+            <br>
+            Tipo de servicio
+        </a>
     </div>
     <br>
     <div class="bnt-group">
-        <a href="" class="btn btn-lg btn-info" style="width: 158px">
+        <a href="{Router::url('/home/admin/user')}" class="btn btn-lg btn-info" style="width: 158px">
             <span class="icon icon-info-sign"></span>
             <br>
             Usuarios
@@ -34,10 +34,7 @@
         <a href="" class="btn btn-lg btn-info" style="width: 158px">
             <span class="icon icon-info-sign"></span>
             <br>
-            Tipo de servicio</a>
-        <a href="" class="btn btn-lg btn-info" style="width: 158px">
-            <span class="icon icon-info-sign"></span>
-            <br>
-            Servicios</a>
+            Servicios
+        </a>
     </div>
 {/block}

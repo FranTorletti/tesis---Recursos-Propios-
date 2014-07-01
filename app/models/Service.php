@@ -30,17 +30,20 @@ class Service {
     private $designation;
 
     /**
-     * @ManyToOne(targetEntity = "Dependence", inversedBy="Dependence" )
+     * @ManyToOne(targetEntity = "Dependence", inversedBy="Dependence")
+     * @JoinColumn(name="dependence_id", referencedColumnName="id",  onDelete="SET NULL")
      */
     private $dependence;
 
     /**
-     * @ManyToOne(targetEntity = "ServiceType", inversedBy="ServiceType" )
+     * @ManyToOne(targetEntity = "ServiceType", inversedBy="ServiceType")
+     * @JoinColumn(name="serviceType_id", referencedColumnName="id",  onDelete="SET NULL")
      */
     private $serviceType;
     
     /**
-     * @ManyToOne(targetEntity = "ResourceOrigin", inversedBy="ResourceOrigin" )
+     * @ManyToOne(targetEntity = "ResourceOrigin", inversedBy="ResourceOrigin")
+     * @JoinColumn(name="resourceOrigin_id", referencedColumnName="id",  onDelete="SET NULL")
      */
     private $resourceOrigin;
 
@@ -48,11 +51,6 @@ class Service {
      * @OneToMany(targetEntity="ServiceUser", mappedBy="service")
      */
     private $serviceUsers;
-
-    /**
-     * @ManyToOne(targetEntity = "ActivityType", inversedBy="ActivityType" )
-     */
-    private $activityType;
 
     // ------------ gets and set method ----------
 
@@ -174,33 +172,24 @@ class Service {
         return $this->serviceUsers;
     }
 
-    /**
-     * Set activityType
-     *
-     * @param string $activityType
-     * @return activityType
-     */
-    public function setActivityType($activityType) {
-        $this->activityType = $activityType;
-        return $this;
-    }
+    public function generateCode($serviceTypeCode,$resourceOriginCode,$dependenceCode){
+        $activityType = Model::getEM()->getRepository("ServiceType")->getByCode($serviceTypeCode);
+        $resourceOrigin = Model::getEM()->getRepository("ResourceOrigin")->getByCode($resourceOriginCode);
+        $dependence = Model::getEM()->getRepository("Dependence")->getByCode($dependenceCode);
 
-    /**
-     * Get activityType
-     *
-     * @return string 
-     */
-    public function getActivityType() {
-        return $this->activityType;
-    }
-
-
-    private function generateCode($lastService){
-        if($lastService){
-            $code = $lastService->getCode();
-            $char = ++$code[0];
-            $number = intval(substr($code,1,3)) +1;
-            return $code.strval($number);
+        $code = Model::getEM()->getRepository("Service")->getLastService($activityType->getId(),$resourceOrigin->getId(),$dependence->getId());
+        if($code){
+            $number = substr($code,1,3);
+            if ($number == "99") {
+                $char = $code[0];
+                $char = ($char == "Z") ? "A" : ++$char;
+                return $char."00";
+            }else{
+                if(strlen(++$number) == 1)
+                    $number = "0".$number;
+                    $char = $code[0];
+                    return $char.$number;    
+            }
         }
         return "A00";
     }

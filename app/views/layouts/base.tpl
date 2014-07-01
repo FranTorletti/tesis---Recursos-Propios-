@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
+      <meta charset="utf-8">
     	<title>{block name="title"}{/block}</title>
     	<link href="{Router::assets('css/bootstrap.css')}" rel="stylesheet"/>  
     	<link rel="shortcut icon" href="{Router::assets('img/favicon.ico')}" type="image/x-icon">

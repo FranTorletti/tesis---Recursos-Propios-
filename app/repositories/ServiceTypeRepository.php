@@ -10,6 +10,13 @@ class ServiceTypeRepository extends EntityRepository {
 
         return ($return);
     }
+
+    function getByCode($code) {
+        $criterio = array("code" => $code);
+        $return = Model::getEM()->getRepository("ServiceType")->findOneBy($criterio);
+
+        return ($return);
+    }
 }
 
 ?>

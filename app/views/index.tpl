@@ -2,7 +2,5 @@
 
 {block name="title"}
 {/block}
-
 {block name="body"}
-, nullable=true
 {/block}
