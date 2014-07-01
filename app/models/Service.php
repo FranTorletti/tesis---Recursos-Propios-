@@ -173,22 +173,24 @@ class Service {
     }
 
     public function generateCode($serviceTypeCode,$resourceOriginCode,$dependenceCode){
-        $activityType = Model::getEM()->getRepository("ServiceType")->getByCode($serviceTypeCode);
+        $serviceType = Model::getEM()->getRepository("ServiceType")->getByCode($serviceTypeCode);
         $resourceOrigin = Model::getEM()->getRepository("ResourceOrigin")->getByCode($resourceOriginCode);
         $dependence = Model::getEM()->getRepository("Dependence")->getByCode($dependenceCode);
-
-        $code = Model::getEM()->getRepository("Service")->getLastService($activityType->getId(),$resourceOrigin->getId(),$dependence->getId());
-        if($code){
-            $number = substr($code,1,3);
-            if ($number == "99") {
-                $char = $code[0];
-                $char = ($char == "Z") ? "A" : ++$char;
-                return $char."00";
-            }else{
-                if(strlen(++$number) == 1)
-                    $number = "0".$number;
+        
+        if ($serviceType != null and $resourceOrigin != null and $dependence != null) {
+            $code = Model::getEM()->getRepository("Service")->getLastService($serviceType->getId(),$resourceOrigin->getId(),$dependence->getId());
+            if($code){
+                $number = substr($code,1,3);
+                if ($number == "99") {
                     $char = $code[0];
-                    return $char.$number;    
+                    $char = ($char == "Z") ? "A" : ++$char;
+                    return $char."00";
+                }else{
+                    if(strlen(++$number) == 1)
+                        $number = "0".$number;
+                        $char = $code[0];
+                        return $char.$number;    
+                }
             }
         }
         return "A00";
