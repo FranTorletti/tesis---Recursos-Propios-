@@ -178,7 +178,7 @@ class Service {
         $dependence = Model::getEM()->getRepository("Dependence")->getByCode($dependenceCode);
         
         if ($serviceType != null and $resourceOrigin != null and $dependence != null) {
-            $code = Model::getEM()->getRepository("Service")->getLastService($serviceType->getId(),$resourceOrigin->getId(),$dependence->getId());
+            $code = Model::getEM()->getRepository("Service")->getLastService($dependence->getId(),$resourceOrigin->getId(),$serviceType->getId());
             if($code){
                 $number = substr($code,1,3);
                 if ($number == "99") {
@@ -192,7 +192,9 @@ class Service {
                         return $char.$number;    
                 }
             }
+            
         }
+        
         return "A00";
     }
 }
