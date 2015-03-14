@@ -22,16 +22,18 @@
   							<li class="divider-vertical"></li>
   							<li><a href="{Router::url('/home/faq')}">FAQ</a></li>
   							<li class="divider-vertical"></li>
-  							<li><a href="{Router::url('/home/admin/panelAdmin')}"> Panel Admin</a></li>
-                <li class="divider-vertical"></li>
+                {if (Session::Get('type')=="admin")}
+    							<li><a href="{Router::url('/home/admin/panelAdmin')}"> Panel Admin</a></li>
+                  <li class="divider-vertical"></li>
+                {/if}
   						</ul>
   						<ul class="nav pull-right">
   							<li class="divider-vertical"></li>
   							{if (Session::Get('nombre')=="")}
-                            	<li><a href="{Router::url('/home/signup')}">Iniciar Sesion</a></li>
-                        	{else}
-                            	<li><a href="{Router::url('/home/logout')}">Cerrar Sesion</a></li>
-                        	{/if}
+                  	<li><a href="{Router::url('/home/signup')}">Iniciar Sesion</a></li>
+              	{else}
+                  	<li><a href="{Router::url('/home/logout')}">Cerrar Sesion</a></li>
+              	{/if}
   							
   						</ul>
   					</div>

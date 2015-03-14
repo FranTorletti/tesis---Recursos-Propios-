@@ -20,13 +20,13 @@ class HomeController extends BaseController {
 
         Model::getEM()->persist($service);
         Model::getEM()->flush();
-        print_r($serviceType->getCode());
+        //print_r($serviceType->getCode());
         print_r("-");
-        print_r($resourceOrigin->getCode());
+        //print_r($resourceOrigin->getCode());
         print_r("-");
-        print_r($service->getCode());
+        //print_r($service->getCode());
         print_r("-");
-        print_r($dependence->getCode());
+        //print_r($dependence->getCode());
         $this->return_html("index.tpl");
     }
 
