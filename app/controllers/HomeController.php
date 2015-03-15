@@ -10,6 +10,7 @@ class HomeController extends BaseController {
         $serviceType = Model::getEM()->getRepository("ServiceType")->getByCode("11");
         $resourceOrigin = Model::getEM()->getRepository("ResourceOrigin")->getByCode("AEW");
         $dependence = Model::getEM()->getRepository("Dependence")->getByCode("23");
+        $service1 = Model::getEM()->getRepository("Service")->findAll();
         $service = new Service();
         $service->setCode($service->generateCode("11","AEW","23"));
 
@@ -21,11 +22,11 @@ class HomeController extends BaseController {
         Model::getEM()->persist($service);
         Model::getEM()->flush();
         //print_r($serviceType->getCode());
-        print_r("-");
+        //print_r("-");
         //print_r($resourceOrigin->getCode());
-        print_r("-");
+        //print_r("-");
         //print_r($service->getCode());
-        print_r("-");
+        //print_r("-");
         //print_r($dependence->getCode());
         $this->return_html("index.tpl");
     }
