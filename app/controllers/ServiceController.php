@@ -11,12 +11,12 @@ class ServiceController extends BaseController {
         $this->return_html("service/Service.tpl");
     }
 
-    /**
-    function ViewResourceOrigin($id) {
-        $this->data["resourceOrigin"] = Model::getEM()->getRepository("ResourceOrigin")->getById($id);
-        $this->return_html("resourceOrigin/ViewResourceOrigin.tpl");
+    
+    function ViewService($id) {
+        $this->data["service"] = Model::getEM()->getRepository("Service")->getById($id);
+        $this->return_html("service/ViewService.tpl");
     }
-
+    /**
     function EditResourceOrigin($id) {
         //get resource origin objet
         $resourceOrigin = Model::getEM()->getRepository("ResourceOrigin")->getById($id);

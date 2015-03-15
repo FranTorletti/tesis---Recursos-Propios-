@@ -5,4 +5,3 @@ app/config/config.php
 composer.lock
 /nbproject/private/
 assets/userPictures/*
-assets/img/*
