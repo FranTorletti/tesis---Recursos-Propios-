@@ -2,10 +2,10 @@
 /**
  * Service
  *
- * @Table(name="service")
- * @Entity(repositoryClass="ServiceRepository")
+ * @Table(name="serviceRecord")
+ * @Entity(repositoryClass="ServiceRecordRepository")
  */
-class Service {
+class ServiceRecord {
     /**
      * @var integer
      *
@@ -21,13 +21,6 @@ class Service {
      * @Column(name="code", type="string")
      */
     private $code;
-
-    /**
-     * @var $designation
-     *
-     * @Column(name="designation", type="string")
-     */
-    private $designation;
 
     /**
      * @ManyToOne(targetEntity = "Dependence", inversedBy="Dependence")
@@ -46,11 +39,6 @@ class Service {
      * @JoinColumn(name="resourceOrigin_id", referencedColumnName="id",  onDelete="SET NULL")
      */
     private $resourceOrigin;
-
-    /**
-     * @OneToMany(targetEntity="ServiceUser", mappedBy="service")
-     */
-    private $serviceUsers;
 
     // ------------ gets and set method ----------
 
@@ -81,26 +69,6 @@ class Service {
      */
     public function getCode() {
         return $this->code;
-    }
-
-    /**
-     * Set designation
-     *
-     * @param string $designation
-     * @return designation
-     */
-    public function setDesignation($designation) {
-        $this->designation = $designation;
-        return $this;
-    }
-
-    /**
-     * Get designation
-     *
-     * @return designation
-     */
-    public function getDesignation() {
-        return $this->designation;
     }
 
     /**
@@ -170,24 +138,6 @@ class Service {
      */
     public function getServiceUsers() {
         return $this->serviceUsers;
-    }
-
-    public function generateCode($lastService){
-        if($lastService){
-            $code = $lastService->getCode();
-            $number = substr($code,1,3);
-            if ($number == "99") {
-                $char = $code[0];
-                $char = ($char == "Z") ? "A" : ++$char;
-                return $char."00";
-            }else{
-                if(strlen(++$number) == 1)
-                    $number = "0".$number;
-                    $char = $code[0];
-                    return $char.$number;    
-            }
-        }
-        return "A00";
     }
 }
  
