@@ -23,11 +23,39 @@ class Service {
     private $code;
 
     /**
+     * @var $name
+     *
+     * @Column(name="name", type="string")
+     */
+    private $name;
+
+    /**
+     * @var $state
+     *
+     * @Column(name="state", type="string")
+     */
+    private $state;
+
+    /**
      * @var $designation
      *
      * @Column(name="designation", type="string")
      */
     private $designation;
+
+    /**
+     * @var string
+     *
+     * @Column(name="facRetention", type="string", length=255)
+     */
+    private $facRetention;
+
+    /**
+     * @var string
+     *
+     * @Column(name="uniRetention", type="string", length=255)
+     */
+    private $uniRetention;
 
     /**
      * @ManyToOne(targetEntity = "Dependence", inversedBy="Dependence")
@@ -84,6 +112,46 @@ class Service {
     }
 
     /**
+     * Set name
+     *
+     * @param string $name
+     * @return name
+     */
+    public function setName($name) {
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return name
+     */
+    public function getName() {
+        return $this->name;
+    }
+
+    /**
+     * Set state
+     *
+     * @param string $state
+     * @return state
+     */
+    public function setState($state) {
+        $this->state = $state;
+        return $this;
+    }
+
+    /**
+     * Get state
+     *
+     * @return state
+     */
+    public function getState() {
+        return $this->state;
+    }
+
+    /**
      * Set designation
      *
      * @param string $designation
@@ -101,6 +169,46 @@ class Service {
      */
     public function getDesignation() {
         return $this->designation;
+    }
+
+    /**
+     * Set facRetention
+     *
+     * @param string $facRetention
+     * @return facRetention
+     */
+    public function setFacRetention($facRetention) {
+        $this->facRetention = $facRetention;
+        return $this;
+    }
+
+    /**
+     * Get facRetention
+     *
+     * @return string 
+     */
+    public function getFacRetention() {
+        return $this->facRetention;
+    }
+
+    /**
+     * Set uniRetention
+     *
+     * @param string $uniRetention
+     * @return uniRetention
+     */
+    public function setUniRetention($uniRetention) {
+        $this->uniRetention = $uniRetention;
+        return $this;
+    }
+
+    /**
+     * Get uniRetention
+     *
+     * @return string 
+     */
+    public function getUniRetention() {
+        return $this->uniRetention;
     }
 
     /**

@@ -24,15 +24,19 @@ class ServiceController extends BaseController {
         $this->data["serviceTypes"] = Model::getEM()->getRepository("ServiceType")->findAll();
         $this->data["resourceOrigins"] = Model::getEM()->getRepository("ResourceOrigin")->findAll();
         $this->data["dependences"] = Model::getEM()->getRepository("Dependence")->findAll();
+        $this->data["users"] = Model::getEM()->getRepository("User")->findAll();
         $this->return_html("service/CreateService.tpl");
     }
 
     function SaveService(){
         $req = Controller::$router->request();
+        $items = $req->params("numItem");
+        $name = $req->params("name");
         $dependence = $req->params("dependence");
         $resourceOrigin = $req->params("resourceOrigin");
         $serviceType = $req->params("serviceType");
         $designation = $req->params("designation");
+
         $serviceType = Model::getEM()->getRepository("ServiceType")->getByCode($serviceType);
         $resourceOrigin = Model::getEM()->getRepository("ResourceOrigin")->getByCode($resourceOrigin);
         $dependence = Model::getEM()->getRepository("Dependence")->getByCode($dependence);
@@ -42,11 +46,16 @@ class ServiceController extends BaseController {
         // create and set service
         $service = new Service();
         $code = $service->generateCode($serviceRecord);
+        $service->setName($name);
+        $service->setState('active');
         $service->setCode($code);
         $service->setDesignation($designation);
         $service->setDependence($dependence);
         $service->setServiceType($serviceType);
         $service->setResourceOrigin($resourceOrigin);
+        $service->setFacRetention($serviceType->getFacRetention());
+        $service->setUniRetention($serviceType->getUniRetention());
+        
         // create and set service record
         if ($serviceRecord) {
             $serviceRecord->setCode($code);    
@@ -56,6 +65,11 @@ class ServiceController extends BaseController {
             $serviceRecord->setDependence($dependence);
             $serviceRecord->setServiceType($serviceType);
             $serviceRecord->setResourceOrigin($resourceOrigin);
+        }
+        // create resposibles
+        foreach ($items as $item) {
+            print_r($item);
+            print_r('<br>');
         }
 
         //update database
@@ -69,6 +83,7 @@ class ServiceController extends BaseController {
         $this->data["services"] = Model::getEM()->getRepository("Service")->findAll();
         
         $this->redirect(Router::url("/home/admin/service"));
+        **/
         
     }
     /**
