@@ -24,6 +24,13 @@ class UserRepository extends EntityRepository {
 
         return ($return);
     }
+
+    function getUsers() {
+        $criterio = array("type" => 'user');
+        $return = Model::getEM()->getRepository("User")->findBy($criterio);
+       
+        return $return;
+    }
 }
 
 ?>

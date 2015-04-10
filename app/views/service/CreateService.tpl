@@ -56,9 +56,7 @@
                     <a class="btn btn-primary" href="javascript:addItem()">Agregar Responsable</a>        
                 </div>
                 <div class="span3" id="buttonDelete" style="display:none">
-                    <button class="btn btn-primary" onClick="removeItem()">
-                        Quitar Responsable
-                    </button>
+                    <a class="btn btn-primary" href="javascript:removeItem()">Quitar Responsable</a>
                 </div>
             </div>
             <br>

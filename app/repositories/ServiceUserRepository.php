@@ -10,6 +10,15 @@ class ServiceUserRepository extends EntityRepository {
 
         return ($return);
     }
+
+    function getByService($service) {
+        $criterio = array("service" => $service);
+        $return = Model::getEM()->getRepository("ServiceUser")->findBy($criterio);
+       
+        return $return;
+    }
+
+    
 }
 
 ?>

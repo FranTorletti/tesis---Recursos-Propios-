@@ -37,13 +37,6 @@ class Service {
     private $state;
 
     /**
-     * @var $designation
-     *
-     * @Column(name="designation", type="string")
-     */
-    private $designation;
-
-    /**
      * @var string
      *
      * @Column(name="facRetention", type="string", length=255)
@@ -149,26 +142,6 @@ class Service {
      */
     public function getState() {
         return $this->state;
-    }
-
-    /**
-     * Set designation
-     *
-     * @param string $designation
-     * @return designation
-     */
-    public function setDesignation($designation) {
-        $this->designation = $designation;
-        return $this;
-    }
-
-    /**
-     * Get designation
-     *
-     * @return designation
-     */
-    public function getDesignation() {
-        return $this->designation;
     }
 
     /**

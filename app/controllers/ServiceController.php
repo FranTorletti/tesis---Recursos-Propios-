@@ -14,9 +14,11 @@ class ServiceController extends BaseController {
     
     function ViewService($id) {
         $this->data["service"] = Model::getEM()->getRepository("Service")->getById($id);
-        $serviceTypes = Model::getEM()->getRepository("ServiceType")->findAll();
-        $resourceOrigins = Model::getEM()->getRepository("ResourceOrigin")->findAll();
-        $dependences = Model::getEM()->getRepository("Dependence")->findAll();
+        $this->data["responsibles"] = Model::getEM()->getRepository("ServiceUser")->getByService($id);
+        $this->data["serviceTypes"] = Model::getEM()->getRepository("ServiceType")->findAll();
+        $this->data["resourceOrigins"] = Model::getEM()->getRepository("ResourceOrigin")->findAll();
+        $this->data["dependences"] = Model::getEM()->getRepository("Dependence")->findAll();
+        $this->data["users"] = Model::getEM()->getRepository("User")->getUsers();
         $this->return_html("service/ViewService.tpl");
     }
 
@@ -24,7 +26,7 @@ class ServiceController extends BaseController {
         $this->data["serviceTypes"] = Model::getEM()->getRepository("ServiceType")->findAll();
         $this->data["resourceOrigins"] = Model::getEM()->getRepository("ResourceOrigin")->findAll();
         $this->data["dependences"] = Model::getEM()->getRepository("Dependence")->findAll();
-        $this->data["users"] = Model::getEM()->getRepository("User")->findAll();
+        $this->data["users"] = Model::getEM()->getRepository("User")->getUsers();
         $this->return_html("service/CreateService.tpl");
     }
 
@@ -35,8 +37,7 @@ class ServiceController extends BaseController {
         $dependence = $req->params("dependence");
         $resourceOrigin = $req->params("resourceOrigin");
         $serviceType = $req->params("serviceType");
-        $designation = $req->params("designation");
-
+        
         $serviceType = Model::getEM()->getRepository("ServiceType")->getByCode($serviceType);
         $resourceOrigin = Model::getEM()->getRepository("ResourceOrigin")->getByCode($resourceOrigin);
         $dependence = Model::getEM()->getRepository("Dependence")->getByCode($dependence);
@@ -49,7 +50,6 @@ class ServiceController extends BaseController {
         $service->setName($name);
         $service->setState('active');
         $service->setCode($code);
-        $service->setDesignation($designation);
         $service->setDependence($dependence);
         $service->setServiceType($serviceType);
         $service->setResourceOrigin($resourceOrigin);
@@ -66,10 +66,14 @@ class ServiceController extends BaseController {
             $serviceRecord->setServiceType($serviceType);
             $serviceRecord->setResourceOrigin($resourceOrigin);
         }
+
         // create resposibles
         foreach ($items as $item) {
-            print_r($item);
-            print_r('<br>');
+            $serviceUser = new ServiceUser();
+            $user = Model::getEM()->getRepository("User")->getById($item);
+            $serviceUser->setService($service);
+            $serviceUser->setUser($user);
+            Model::getEM()->persist($serviceUser);    
         }
 
         //update database
@@ -83,8 +87,7 @@ class ServiceController extends BaseController {
         $this->data["services"] = Model::getEM()->getRepository("Service")->findAll();
         
         $this->redirect(Router::url("/home/admin/service"));
-        **/
-        
+                
     }
     /**
     function EditResourceOrigin($id) {

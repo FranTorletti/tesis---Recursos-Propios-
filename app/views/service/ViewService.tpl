@@ -10,6 +10,11 @@
             <thead>
                 <th></th>
                 <th></th>
+                <th></th>
+                <th></th>
+                {foreach from=$responsibles item=r}
+                    <th></th>
+                {/foreach}
             </thead>
             <tbody style="border-collapse:separate">
                 <tr class="success">
@@ -19,9 +24,29 @@
                     </td>
                 </tr>
                 <tr class="success">
-                    <td><label>Designacion</label></td>
-                    <td>{$service->getDesignation()}</td>
+                    <td><label>Nombre</label></td>
+                    <td>{$service->getName()}</td>
                 </tr>
+                <tr class="success">
+                    <td><label>Retencion de la Universidad</label></td>
+                    <td>{$service->getUniRetention()}</td>
+                </tr>
+                <tr class="success">
+                    <td><label>Retencion de la Facultad</label></td>
+                    <td>{$service->getFacRetention()}</td>
+                </tr>
+                <tr class="success">
+                    <td><label>Estado</label></td>
+                    <td>{$service->getState()}</td>
+                </tr>
+                {assign var=index value=0}
+                {foreach from=$responsibles item=r}
+                    <tr class="success">
+                        <td><label>Responsable ({$index})</label></td>
+                        <td>{$r->getUser()->getName()}</td>
+                    </tr>
+                    {$index = $index +1}
+                {/foreach}
             </tbody>
         </table>
         <br>
@@ -40,7 +65,7 @@
             </div>
         </div>
     </div>
-
+    
     <div id="form" style="visibility:hidden;display:none">
         <form action="{Router::url('/home/admin/service/edit/')}{$service->getId()}" method="POST" enctype="multipart/form-data">
             <table class="table table-condensed">
@@ -55,20 +80,66 @@
                         <td><input name="code" type="text" value="{$service->getCode()}" onkeypress="return isNumberKey(event)" required></td>
                     </tr>
                     <tr class="success">
-                        <td><label>Descripcion</label></td>
-                        <td><input name="description" type="text" value="{$dependence->getDescription()}" required></td>
+                        <td><label>Nombre</label></td>
+                        <td><input name="name" value="{$service->getName()}" type="text" placeholder="Nombre" required></td>
                     </tr>
                     <tr class="success">
-                        <td><label>Nota</label></td>
-                        <td><input name="note" type="text" value="{$dependence->getNote()}" required></td>
+                        <td><label>Dependencia</label></td>
+                        <td>
+                            <select name="dependence" required>
+                                {foreach from=$dependences item=d}
+                                    <option {if $d->getCode() == $service->getDependence()->getCode()}
+                                                selected="selected" 
+                                            {/if} value="{$d->getCode()}">
+                                        {$d->getCode()}
+                                    </option>
+                                {/foreach}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr class="success">
+                        <td><label>Tipo de Servicio</label></td>
+                        <td>
+                            <select name="serviceType" required>
+                                {foreach from=$serviceTypes item=st}
+                                    <option {if $st->getCode() == $service->getServiceType()->getCode()}
+                                                selected="selected" 
+                                            {/if} value="{$st->getCode()}">
+                                        {$st->getCode()}
+                                    </option>
+                                {/foreach}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr class="success">
+                        <td><label>Origen de los recursos</label></td>
+                        <td>
+                            <select name="resourceOrigin" required>
+                                {foreach from=$resourceOrigins item=r}
+                                    <option {if $r->getCode() == $service->getResourceOrigin()->getCode()}
+                                                selected="selected" 
+                                            {/if} value="{$r->getCode()}">
+                                        {$r->getCode()}
+                                    </option>
+                                {/foreach}
+                            </select>
+                        </td>
                     </tr>
                 </tbody>
             </table>
-            <input type="submit" value="Actualizar" class="btn btn-success">
+            <div class="row">
+                <div class="span2 offset1">
+                    <button type="botton" class="btn btn-info" onclick="noEdit()">
+                        <i class="icon-white icon-arrow-left"></i> Volver
+                    </button>     
+                </div>
+                <div class="span2">
+                    <input type="submit" value="Actualizar" class="btn btn-success">        
+                </div>
+            </div>
         </form>
-        <button type="botton" class="btn btn-info" onclick="noEdit()"><i class="icon-white icon-arrow-left"></i> Volver</button>
     </div>
-
+    
     <script type="text/javascript">
         function edit() {
             document.getElementById("form").style.visibility = "visible";

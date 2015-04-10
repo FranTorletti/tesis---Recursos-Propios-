@@ -22,7 +22,7 @@
         <table class="table table-condensed">
             <thead>
                 <th><center>Codigo</center></th>
-                <th><center>Designacion</center></th>
+                <th><center>Nombre</center></th>
                 <th><center>Accion</center></th>
             </thead>
             <tbody>
@@ -37,7 +37,7 @@
                         </td>
                         <td>
                             <a href="{Router::url('/home/admin/service/view/')}{$service->getId()}" style="text-decoration:none">
-                                <center>{$service->getDesignation()}</center>
+                                <center>{$service->getName()}</center>
                             </a>
                         </td>
                         <td>

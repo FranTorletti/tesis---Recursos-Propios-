@@ -60,8 +60,8 @@
                         <td><label>Tipo de Usuario</label></td>
                         <td>
                             <select name="type" placeholder="tipo de usuario" required>
-                                <option value="DNI" selected="selected">Usuario Común</option>
-                                <option value="DU">Administrador</option>
+                                <option value="user" selected="selected">Usuario Común</option>
+                                <option value="admin">Administrador</option>
                             </select>
                         </td>
                     </tr>
