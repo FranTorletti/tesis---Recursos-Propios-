@@ -63,5 +63,12 @@ Controller::$router->post('/home/admin/service/save', 'ServiceController', 'Save
 Controller::$router->post('/home/admin/service/edit/:id', 'ServiceController', 'EditService');
 Controller::$router->get('/home/admin/service/delete/:id', 'ServiceController', 'DeleteService');
 **/
+
+// Admin - Transaction
+Controller::$router->get('/home/admin/transaction/:id', 'TransactionController', 'CreateTransaction');
+//Controller::$router->get('/home/admin/service/view/:id', 'ServiceController', 'ViewService');
+//Controller::$router->get('/home/admin/service/create', 'ServiceController', 'CreateService');
+//Controller::$router->post('/home/admin/service/save', 'ServiceController', 'SaveService');
+
 //run server
 Controller::$router->run();

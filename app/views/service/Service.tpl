@@ -42,7 +42,11 @@
                         </td>
                         <td>
                             <a href="{Router::url('/home/admin/service/view/')}{$service->getId()}" style="text-decoration:none">
-                                <center>Accion :p</center>
+                                <center>
+                                    <button onclick="{Router::url('/home/admin/transaction/')}{$service->getId()}">
+                                        Crear Trasaccion
+                                    </button>
+                                </center>  
                             </a>
                         </td>
                     </tr>

@@ -14,7 +14,14 @@ class ServiceController extends BaseController {
     
     function ViewService($id) {
         $this->data["service"] = Model::getEM()->getRepository("Service")->getById($id);
-        $this->data["responsibles"] = Model::getEM()->getRepository("ServiceUser")->getByService($id);
+        $resp = Model::getEM()->getRepository("ServiceUser")->getByService($id);
+        $this->data["items"] = count($resp);
+        $responsibles = array();
+        foreach ($resp as $key) {
+            $item = array('id' => $key->getUser()->getId(), 'name' => $key->getUser()->getName(), 'surname' => $key->getUser()->getSurname());
+            array_push($responsibles, $item);
+        }
+        $this->data["responsibles"] = $responsibles;
         $this->data["serviceTypes"] = Model::getEM()->getRepository("ServiceType")->findAll();
         $this->data["resourceOrigins"] = Model::getEM()->getRepository("ResourceOrigin")->findAll();
         $this->data["dependences"] = Model::getEM()->getRepository("Dependence")->findAll();

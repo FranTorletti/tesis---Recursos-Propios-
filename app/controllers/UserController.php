@@ -24,7 +24,7 @@ class UserController extends BaseController {
             $this->redirect(Router::url("/"));
 
         } else {
-            FlashMsgView::add(MsgType::Error, "Escriba bien su Email o Contraseña");
+            FlashMsgView::add(MsgType::Error, "Su Email o Contraseña son incorrectos");
             $this->redirect(Router::url("/home/signup"));
         }
     }
