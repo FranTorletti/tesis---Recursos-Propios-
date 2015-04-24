@@ -39,7 +39,7 @@
                     <td><label>Estado</label></td>
                     <td>{$service->getState()}</td>
                 </tr>
-                {assign var=index value=0}
+                {assign var=index value=1}
                 {foreach from=$responsibles item=r}
                     <tr class="success">
                         <td><label>Responsable ({$index})</label></td>
@@ -124,6 +124,24 @@
                                 {/foreach}
                             </select>
                         </td>
+                        {assign var=index value=1}
+                        {foreach from=$responsibles item=r}
+                            <tr id="item{{$index}}" class="success">
+                                <td><label>Responsable ({$index})</label></td>
+                                <td>
+                                    <select name="responsibles" required>
+                                        {foreach from=$users item=u}
+                                            <option {if $u->getId() == $responsibles[$index-1]['id']}
+                                                        selected="selected" 
+                                                    {/if} value="{$u->getId()}">
+                                                {$u->getName()}
+                                            </option>
+                                        {/foreach}
+                                    </select>
+                                </td>
+                            </tr>
+                            {$index = $index +1}
+                        {/foreach}
                     </tr>
                 </tbody>
             </table>
@@ -151,6 +169,7 @@
     
     <script type="text/javascript">
         var items = parseInt("{$items}");
+        
         function edit() {
             // visible html
             document.getElementById("form").style.visibility = "visible";
@@ -158,12 +177,9 @@
             document.getElementById("table").style.visibility = "hidden";
             document.getElementById("table").style.display = "none";
 
-            var responsibles = {$responsibles|json_encode};
-
-            for (var i = 0; i < items ; i++) {
-                createItem(i,responsibles[i]);
+            if (items > 0) {
+                document.getElementById('buttonDelete').style.display = 'block';
             };
-
         };
 
         function createItem(item,responsible){
@@ -195,20 +211,19 @@
             document.getElementById("form").style.display = "none";
         };
 
-
-
-        function newItem(item,id){
+        function newItem(){
             result="";
             result+=
-             "     <td><label>Responsable ("+item+")</label></td>" +
+             "     <td><label>Responsable ("+items+")</label></td>" +
              "     <td >" +
-             "          <select name=\"numItem[]\" required>" +
+             "          <select name=\"numItem[]\" id=\"numItem[]\" required>" +
              "              {foreach from=$users item=u}"+
-             "                  <option id=\""+item+"-{$u->getId()}\" value=\"{$u->getId()}\">{$u->getName()}</option>"+
+             "                  <option value=\"{$u->getId()}\">{$u->getName()}</option>"+
              "              {/foreach}"+
              "          </select>"+
              "     </td>"
             ;
+
             return result;
         }
 
@@ -223,7 +238,7 @@
               
               item.setAttribute("id", "item"+(items)); 
               item.setAttribute("class", "success");
-              item.innerHTML = newItem(items);
+              item.innerHTML = newItem();
               
               var container = document.getElementById("itemsTable");
               container.appendChild(item);
@@ -235,7 +250,6 @@
         function removeItem(){
             var remove = document.getElementById("item" + items);
             var container = document.getElementById("itemsTable");
-            
             container.removeChild(remove);
             items = items - 1;
             //hide button delete item
