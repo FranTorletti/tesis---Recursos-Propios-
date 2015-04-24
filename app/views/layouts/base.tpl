@@ -70,9 +70,9 @@
 	    			</div>
 	    			<div class="span9" style="max-width:100%"> <!-- Body Main -->
 	    				{block name ="body"}
+                {FlashMsgView::displayAll()}
 
-
-	                    {/block}
+              {/block}
 	    			</div>
 	    		</div>	
     		</div>

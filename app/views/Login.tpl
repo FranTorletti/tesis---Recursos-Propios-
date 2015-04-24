@@ -4,7 +4,6 @@
 {/block}
 
 {block name="body"}
-    {FlashMsgView::displayAll()}
     <div class="page-header" style="color: #5a5a5a;">
         <h1>Login</h1>
     </div>

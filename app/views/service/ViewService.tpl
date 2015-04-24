@@ -160,8 +160,8 @@
 
             var responsibles = {$responsibles|json_encode};
 
-            for (var i = 1; i <= items ; i++) {
-                createItem(i-1,responsibles[i-1]);
+            for (var i = 0; i < items ; i++) {
+                createItem(i,responsibles[i]);
             };
 
         };

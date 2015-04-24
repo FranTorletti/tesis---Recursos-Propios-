@@ -96,29 +96,44 @@ class ServiceController extends BaseController {
         $this->redirect(Router::url("/home/admin/service"));
                 
     }
-    /**
-    function EditResourceOrigin($id) {
+    
+    function EditService($id) {
         //get resource origin objet
-        $resourceOrigin = Model::getEM()->getRepository("ResourceOrigin")->getById($id);
+        $service = Model::getEM()->getRepository("Service")->getById($id);
         //get form data
         $req = Controller::$router->request();
-        $code = $req->params("code");
-        $description = $req->params("description");
-        $note = $req->params("note");
+        $items = $req->params("numItem");
+        $name = $req->params("name");
+        $dependence = $req->params("dependence");
+        $resourceOrigin = $req->params("resourceOrigin");
+        $serviceType = $req->params("serviceType");
+        $resp = Model::getEM()->getRepository("ServiceUser")->getByService($id);
+        print_r($items);
+        die();
         // set resource origin
-        $resourceOrigin->setCode($code);
-        $resourceOrigin->setDescription($description);
-        $resourceOrigin->setNote($note);
+        
         //update database
-        Model::getEM()->merge($resourceOrigin);
-        Model::getEM()->flush();
+        //Model::getEM()->merge($service);
+        //Model::getEM()->flush();
         // alert 
         FlashMsgView::add(MsgType::Successful, "El origen de los recursos se ha actualizado correctamente!");
-        // redirect to view resource origin
-        $this->data["resourceOrigin"] = $resourceOrigin;
-        $this->redirect(Router::url("/home/admin/resourceOrigin/view/".$id));
+        // redirect to view service
+        $this->data["service"] = $service;
+        $resp = Model::getEM()->getRepository("ServiceUser")->getByService($id);
+        $this->data["items"] = count($resp);
+        $responsibles = array();
+        foreach ($resp as $key) {
+            $item = array('id' => $key->getUser()->getId(), 'name' => $key->getUser()->getName(), 'surname' => $key->getUser()->getSurname());
+            array_push($responsibles, $item);
+        }
+        $this->data["responsibles"] = $responsibles;
+        $this->data["serviceTypes"] = Model::getEM()->getRepository("ServiceType")->findAll();
+        $this->data["resourceOrigins"] = Model::getEM()->getRepository("ResourceOrigin")->findAll();
+        $this->data["dependences"] = Model::getEM()->getRepository("Dependence")->findAll();
+        $this->data["users"] = Model::getEM()->getRepository("User")->getUsers();
+        $this->return_html("service/ViewService.tpl");
     }
-
+/**
     function CreateResourceOrigin(){
         $this->return_html("resourceOrigin/CreateResourceOrigin.tpl");
     }
