@@ -155,39 +155,25 @@ class ServiceController extends BaseController {
         $this->data["users"] = Model::getEM()->getRepository("User")->getUsers();
         $this->return_html("service/ViewService.tpl");
     }
-/**
-    function CreateResourceOrigin(){
-        $this->return_html("resourceOrigin/CreateResourceOrigin.tpl");
-    }
 
-    function SaveResourceOrigin(){
-        $req = Controller::$router->request();
-        $code = $req->params("code");
-        $description = $req->params("description");
-        $note = $req->params("note");
-        // create and set resource origin
-        $resourceOrigin = new ResourceOrigin();
-        $resourceOrigin->setCode($code);
-        $resourceOrigin->setDescription($description);
-        $resourceOrigin->setNote($note);
-        //update database
-        Model::getEM()->persist($resourceOrigin);
+    function DeleteService($id) {
+        //delete resposible by service
+        $resp = Model::getEM()->getRepository("ServiceUser")->getByService($id);
+        foreach ($resp as $key) {
+            Model::getEM()->remove($key);
+            Model::getEM()->flush(); 
+        }
+        //delete service
+        $service = Model::getEM()->getRepository("Service")->find($id);
+        Model::getEM()->remove($service);
         Model::getEM()->flush();
-        // alert
-        FlashMsgView::add(MsgType::Successful, "El origen de los recursos se ha creado correctamente!");
-        // redirect to view resource origin
-        $this->data["resourceOrigins"] = Model::getEM()->getRepository("ResourceOrigin")->findAll();
-        $this->redirect(Router::url("/home/admin/resourceOrigin"));
+        FlashMsgView::add(MsgType::Successful, "El servicio se ha borrado correctamente");
+        // redirect to view services
+        $this->data["services"] = Model::getEM()->getRepository("Service")->findAll();
+        
+        $this->redirect(Router::url("/home/admin/service"));
     }
-
-    function DeleteResourceOrigin($id) {
-        $resourceOrigin = Model::getEM()->getRepository("ResourceOrigin")->find($id);
-        Model::getEM()->remove($resourceOrigin);
-        Model::getEM()->flush();
-        FlashMsgView::add(MsgType::Successful, "El origen de los recursos se ha borrado correctamente");
-        $this->redirect(Router::url("/home/admin/resourceOrigin"));
-    }
-    **/
+    
 }
 
 ?>

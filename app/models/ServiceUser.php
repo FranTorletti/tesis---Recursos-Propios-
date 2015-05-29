@@ -16,7 +16,7 @@ class ServiceUser {
     private $id;
     
     /**
-     * @ManyToOne(targetEntity = "Service", inversedBy="User" )
+     * @ManyToOne(targetEntity = "Service", inversedBy="Service")
      */
     private $service;
 
