@@ -73,7 +73,7 @@ class ServiceController extends BaseController {
             $serviceRecord->setServiceType($serviceType);
             $serviceRecord->setResourceOrigin($resourceOrigin);
         }
-
+        $items = array_unique($items);
         // create resposibles
         foreach ($items as $item) {
             $serviceUser = new ServiceUser();
@@ -108,14 +108,36 @@ class ServiceController extends BaseController {
         $resourceOrigin = $req->params("resourceOrigin");
         $serviceType = $req->params("serviceType");
         $resp = Model::getEM()->getRepository("ServiceUser")->getByService($id);
-        print_r($items);
-        die();
-        // set resource origin
         
-        //update database
-        //Model::getEM()->merge($service);
-        //Model::getEM()->flush();
-        // alert 
+        $items = array_unique($items);
+        $addUserServices = $items;
+        
+        foreach ($resp as $key) {
+            $found = false;
+            foreach ($items as $i) {
+                if ($i == $key->getUser()->getId()) {
+                    $found = true;
+                };   
+            }
+            if ($found) { 
+                $index = array_search($key->getUser()->getId(),$addUserServices);
+                unset($addUserServices[$index]);
+            } else {
+                Model::getEM()->remove($key);
+                Model::getEM()->flush();
+            };    
+        }
+
+        foreach ($addUserServices as $id) {
+            $serviceUser = new ServiceUser();
+            $user = Model::getEM()->getRepository("User")->getById($id);
+            $serviceUser->setService($service);
+            $serviceUser->setUser($user);
+            Model::getEM()->persist($serviceUser);    
+        }
+        Model::getEM()->flush();
+
+        
         FlashMsgView::add(MsgType::Successful, "El origen de los recursos se ha actualizado correctamente!");
         // redirect to view service
         $this->data["service"] = $service;

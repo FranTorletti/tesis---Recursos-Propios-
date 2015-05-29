@@ -129,7 +129,7 @@
                             <tr id="item{{$index}}" class="success">
                                 <td><label>Responsable ({$index})</label></td>
                                 <td>
-                                    <select name="responsibles" required>
+                                    <select name="numItem[]" id="numItem[]" required>
                                         {foreach from=$users item=u}
                                             <option {if $u->getId() == $responsibles[$index-1]['id']}
                                                         selected="selected" 
