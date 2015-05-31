@@ -16,7 +16,7 @@ class Transaction {
     private $id;
     
     /**
-     * @var $type
+     * @var $string
      *
      * @Column(name="type", type="string")
      */
@@ -25,9 +25,9 @@ class Transaction {
     /**
      * @var string
      *
-     * @Column(name="description", type="string", length=255)
+     * @Column(name="transactionType", type="string", length=255)
      */
-    private $description;
+    private $transactionType;
 
     /**
      * @var date
@@ -37,18 +37,25 @@ class Transaction {
     private $date;
 
     /**
+     * @var $string
+     *
+     * @Column(name="code", type="string")
+     */
+    private $code;
+
+    /**
+     * @var string
+     *
+     * @Column(name="description", type="string", length=255)
+     */
+    private $description;
+
+    /**
      * @var string
      *
      * @Column(name="amount", type="string", length=255)
      */
     private $amount;
-
-    /**
-     * @var string
-     *
-     * @Column(name="onvoiceCode", type="string", length=255)
-     */
-    private $invoiceCode;
 
     /**
      * @var string
@@ -86,7 +93,7 @@ class Transaction {
      * @param string $type
      * @return type
      */
-    public function setype($code) {
+    public function seType($type) {
         $this->type = $type;
         return $this;
     }
@@ -98,6 +105,65 @@ class Transaction {
      */
     public function getType() {
         return $this->type;
+    }
+
+    /**
+     * Set transactionType
+     *
+     * @param string $transactionType
+     * @return string
+     */
+    public function setTransactionType($code) {
+        $this->transactionType = $transactionType;
+        return $this;
+    }
+
+    /**
+     * Get transactionType
+     *
+     * @return type
+     */
+    public function getTransactionType() {
+        return $this->transactionType;
+    }
+
+    /**
+     * Set Date
+     *
+     * @param date $date
+     * @return date
+     */
+    public function setDate($date) {
+        $this->date = $date;
+        return $this;
+    }
+    /**
+     * Get Date
+     *
+     * @return date
+     */
+    public function getDate() {
+        return $this->date;
+    }
+
+    /**
+     * Set code
+     *
+     * @param string $code
+     * @return code
+     */
+    public function setCode($code) {
+        $this->code = $code;
+        return $this;
+    }
+
+    /**
+     * Get code
+     *
+     * @return string 
+     */
+    public function getCode() {
+        return $this->code;
     }
 
     /**
@@ -121,25 +187,6 @@ class Transaction {
     }
 
     /**
-     * Set Date
-     *
-     * @param date $date
-     * @return date
-     */
-    public function setDate($date) {
-        $this->date = $date;
-        return $this;
-    }
-    /**
-     * Get Date
-     *
-     * @return date
-     */
-    public function getDate() {
-        return $this->date;
-    }
-
-    /**
      * Set amount
      *
      * @param string $amount
@@ -159,26 +206,7 @@ class Transaction {
         return $this->amount;
     }    
 
-    /**
-     * Set invoiceCode
-     *
-     * @param string $invoiceCode
-     * @return invoiceCode
-     */
-    public function setInvoiceCode($invoiceCode) {
-        $this->invoiceCode = $invoiceCode;
-        return $this;
-    }
-
-    /**
-     * Get invoiceCode
-     *
-     * @return string 
-     */
-    public function getInvoiceCode() {
-        return $this->invoiceCode;
-    }
-
+    
     /**
      * Set facRetention
      *
