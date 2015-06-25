@@ -36,5 +36,10 @@
             <br>
             Servicios
         </a>
+        <a href="{Router::url('/home/admin/transactionType')}" class="btn btn-lg btn-info" style="width: 158px">
+            <span class="icon icon-info-sign"></span>
+            <br>
+            Tipos de Transacciones
+        </a>
     </div>
 {/block}

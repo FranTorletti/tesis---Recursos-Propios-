@@ -63,6 +63,11 @@
                     Eliminar
                 </a>        
             </div>
+            <div class="span3">
+                <a href="{Router::url('/home/admin/transaction/')}{$service->getId()}" class="btn btn-primary">
+                    Crear Trasaccion
+                </a>
+            </div>
         </div>
     </div>
     

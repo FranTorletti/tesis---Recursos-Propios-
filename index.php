@@ -62,12 +62,19 @@ Controller::$router->post('/home/admin/service/save', 'ServiceController', 'Save
 Controller::$router->post('/home/admin/service/edit/:id', 'ServiceController', 'EditService');
 Controller::$router->get('/home/admin/service/delete/:id', 'ServiceController', 'DeleteService');
 
+// Admin - Transaction types
+Controller::$router->get('/home/admin/transactionType', 'TransactionTypeController', 'TransactionType');
+Controller::$router->get('/home/admin/transactionType/view/:id', 'TransactionTypeController', 'ViewTransactionType');
+Controller::$router->post('/home/admin/transactionType/edit/:id', 'TransactionTypeController', 'EditTransactionType');
+Controller::$router->get('/home/admin/transactionType/create', 'TransactionTypeController', 'CreateTransactionType');
+Controller::$router->post('/home/admin/transactionType/save', 'TransactionTypeController', 'SaveTransactionType');
+Controller::$router->get('/home/admin/transactionType/delete/:id', 'TransactionTypeController', 'DeleteTransactionType');
 
 // Admin - Transaction
 Controller::$router->get('/home/admin/transaction/:id', 'TransactionController', 'CreateTransaction');
+Controller::$router->post('/home/admin/transaction/save/:id', 'TransactionController', 'SaveTransaction');
 //Controller::$router->get('/home/admin/service/view/:id', 'ServiceController', 'ViewService');
-//Controller::$router->get('/home/admin/service/create', 'ServiceController', 'CreateService');
-//Controller::$router->post('/home/admin/service/save', 'ServiceController', 'SaveService');
+
 
 //run server
 Controller::$router->run();

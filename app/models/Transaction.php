@@ -6,6 +6,11 @@
  * @Entity(repositoryClass="TransactionRepository")
  */
 class Transaction {
+
+//    public function __construct(){
+  //      $this->date = new \DateTime();
+    //} 
+
     /**
      * @var integer
      *
@@ -72,7 +77,7 @@ class Transaction {
     private $uniRetention;
 
     /**
-     * @OneToMany(targetEntity="ServiceUser", mappedBy="service")
+     * @ManyToOne(targetEntity = "User", inversedBy="User" )
      */
     private $user;
 
@@ -93,7 +98,7 @@ class Transaction {
      * @param string $type
      * @return type
      */
-    public function seType($type) {
+    public function setType($type) {
         $this->type = $type;
         return $this;
     }
@@ -113,7 +118,7 @@ class Transaction {
      * @param string $transactionType
      * @return string
      */
-    public function setTransactionType($code) {
+    public function setTransactionType($transactionType) {
         $this->transactionType = $transactionType;
         return $this;
     }
